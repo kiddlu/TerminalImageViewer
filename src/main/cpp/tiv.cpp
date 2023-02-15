@@ -1,7 +1,7 @@
 #include <iostream>
 #include <bitset>
 #include <cmath>
-#include <fstream> 
+#include <fstream>
 #include <map>
 #include <string>
 #include <vector>
@@ -600,9 +600,12 @@ int main(int argc, char* argv[]) {
       try {
         cimg_library::CImg<unsigned char> image = load_rgb_CImg(file_names[i].c_str());
 
+        std::cout << "Src " << "W: " << image.width() << " " << "H: " << image.height() << std::endl;
+
         if (image.width() > maxWidth || image.height() > maxHeight) {
           size new_size = size(image).fitted_within(size(maxWidth,maxHeight));
           image.resize(new_size.width, new_size.height, -100, -100, 5);
+          std::cout << "Dst " << "W: " << new_size.width << " " << "H: " << new_size.height << std::endl;
         }
         emit_image(image, flags);
       } catch(cimg_library::CImgIOException & e) {
